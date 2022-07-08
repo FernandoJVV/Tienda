@@ -2,7 +2,9 @@
 package com.tienda.service;
 
 import com.tienda.dao.ClienteDao;
+import com.tienda.dao.CreditoDao;
 import com.tienda.domain.Cliente;
+import com.tienda.domain.Credito;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,9 @@ public class ClienteServiceImpl implements ClienteService {
       //se crea en tiempo de ejecucion, si aun no se ha creado 
     @Autowired
     private ClienteDao clienteDao;
+    
+    @Autowired
+    private CreditoDao creditoDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -24,6 +29,10 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     @Transactional
     public void save(Cliente cliente) {
+        Credito credito = cliente.getCredito();
+        credito = creditoDao.save(credito);
+        cliente.setCredito(credito);
+        
         clienteDao.save(cliente);
     }
 
