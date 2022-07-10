@@ -1,9 +1,8 @@
 package com.tienda.controller;
 
-import com.tienda.dao.CategoriaDao;
+
 import com.tienda.domain.Categoria;
 import com.tienda.service.CategoriaService;
-import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

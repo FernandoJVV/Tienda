@@ -2,7 +2,9 @@
 package com.tienda.service;
 
 import com.tienda.dao.ArticuloDao;
+import com.tienda.dao.CategoriaDao;
 import com.tienda.domain.Articulo;
+import com.tienda.domain.Categoria;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ public class ArticuloServiceImpl implements ArticuloService {
      //se crea en tiempo de ejecucion, si aun no se ha creado 
     @Autowired
     private ArticuloDao articuloDao;
+   
 
     @Override
     @Transactional(readOnly = true)
