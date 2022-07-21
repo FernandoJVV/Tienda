@@ -4,6 +4,7 @@ import com.tienda.dao.ClienteDao;
 import com.tienda.domain.Cliente;
 import com.tienda.service.ClienteService;
 import java.util.Arrays;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,21 @@ public class ClienteController {
     public String eliminarCliente(Cliente cliente) {
         clienteService.delete(cliente);
         return "redirect:/cliente/listado";
+    }
+    
+    //Para ir a la pagina
+    @GetMapping("/cliente/buscar")
+    public String buscarCliente(Cliente cliente) {
+        return "cliente/buscar";
+    }
+    
+    //Cuando se le da buscar en el html
+   @PostMapping("/cliente/busqueda")
+    public String busquedaCliente(Cliente cliente,  Model model) {
+        List<Cliente> clientes = clienteService.findByApellidos(cliente.getApellidos());
+        cliente = clientes.get(0);
+        model.addAttribute("cliente", cliente);
+        return "/cliente/modificar";
     }
 
 }

@@ -1,9 +1,8 @@
 package com.tienda.controller;
 
-import com.tienda.dao.ArticuloDao;
 import com.tienda.domain.Articulo;
 import com.tienda.service.ArticuloService;
-import java.util.Arrays;
+import com.tienda.service.CategoriaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,9 @@ public class ArticuloController {
 
     @Autowired
     private ArticuloService articuloService;
+    
+    @Autowired
+    private CategoriaService categoriaService;
 
     //GetMapping("/") sirve para decirle que ejecute este metodo cuando se mete al localhost
     @GetMapping("/articulo/listado")
@@ -29,7 +31,9 @@ public class ArticuloController {
     }
 
     @GetMapping("/articulo/nuevo")
-    public String nuevoArticulo(Articulo articulo) {
+    public String nuevoArticulo(Articulo articulo, Model model) {
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);        
         return "articulo/modificar";
     }
 
@@ -43,6 +47,8 @@ public class ArticuloController {
     public String modificarArticulo(Articulo articulo, Model model) {
         articulo = articuloService.getArticulo(articulo);
         model.addAttribute("articulo", articulo);
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);      
         return "articulo/modificar";
     }
 

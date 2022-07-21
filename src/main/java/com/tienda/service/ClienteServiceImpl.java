@@ -48,4 +48,10 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteDao.findById(cliente.getIdCliente()).orElse(null);
     }
     
+    @Override
+    @Transactional(readOnly = true)
+     public List<Cliente> findByApellidos(String apellidos){
+        return clienteDao.findByApellidos(apellidos);
+     }
+    
 }

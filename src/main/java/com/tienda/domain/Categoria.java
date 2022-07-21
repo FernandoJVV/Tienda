@@ -1,7 +1,6 @@
 package com.tienda.domain;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +18,6 @@ public class Categoria implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_categoria")
     private Long idCategoria;
     private String descripcion;
     private boolean activo;
@@ -34,6 +32,5 @@ public class Categoria implements Serializable {
         this.activo = activo;
     }
 
- 
     
 }
