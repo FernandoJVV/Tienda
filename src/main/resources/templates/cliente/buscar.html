@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Techshop</title>
-        <meta charset="UTF-8">
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
+    <head th:replace="layout/plantilla :: head">
+        <title>TechShop</title>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>
         <div class="contenido">
-        <h2>Buscar cliente</h2>
-            <form th:action="@{/cliente/busqueda}"
-              method="post"
-              th:object="${cliente}">
-                
-            <input type="hidden" name="idCliente" th:field="*{idCliente}"/>
-            
-            <label for = "apellidos"> Apellidos:</label>
-            <input type="text" name="apellidos" th:field="*{apellidos}"/>
-            
-             <hr>
-             <input type="submit" name="buscar" value="Buscar"/>
-        </form>
+            <h2>Datos de Cliente</h2>
+            <a th:href="@{/cliente/listado}">Regresar</a>
+            <hr>
+            <form th:action="@{/cliente/buscar}"
+                  method="post"
+                  th:object="${cliente}">                
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" name="apellidos" th:field="*{apellidos}"/>                
+                <hr>
+                <input type="submit" name="buscar" value="Buscar"/>
+            </form>
         </div>
-
         <footer th:replace="layout/plantilla :: footer"/>
-
     </body>
 </html>

@@ -54,18 +54,22 @@ public class ClienteController {
     }
     
     //Para ir a la pagina
-    @GetMapping("/cliente/buscar")
-    public String buscarCliente(Cliente cliente) {
+    @GetMapping("/cliente/busqueda")
+    public String busquedaCliente(Cliente cliente) {
         return "cliente/buscar";
     }
     
     //Cuando se le da buscar en el html
-   @PostMapping("/cliente/busqueda")
-    public String busquedaCliente(Cliente cliente,  Model model) {
-        List<Cliente> clientes = clienteService.findByApellidos(cliente.getApellidos());
-        cliente = clientes.get(0);
-        model.addAttribute("cliente", cliente);
-        return "/cliente/modificar";
+   @PostMapping("/cliente/buscar")
+    public String buscarCliente(Cliente cliente,  Model model) {
+        cliente = clienteService.getByApellidos(cliente);
+        if (cliente!=null){
+            model.addAttribute("cliente",cliente);
+             return "/cliente/modificar";
+        } else {
+             return "/cliente/buscar";
+        }
+       
     }
 
 }

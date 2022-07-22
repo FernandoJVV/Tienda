@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+    <head th:replace="layout/plantilla :: head">
         <title>Techshop</title>
-        <meta charset="UTF-8">
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
+       
 
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>
         <div class="contenido">
-            <h2>Datos de Articulo</h2>
-            <a th:href="@{/articulo/listado}">Regresar</a>
+            <h2>[[#{articulo.datos}]]</h2>
+            <a th:href="@{/articulo/listado}">[[#{accion.regresar}]]</a>
             <br>
             <form th:action="@{/articulo/guardar}"
                   method="post"
                   th:object="${articulo}">
                 <input type="hidden" name="idArticulo" th:field="*{idArticulo}"/>
                 
-                 <label for = "categoria"> Categoria:</label>
+                 <label for = "categoria"> [[#{articulo.categoria}]]:</label>
                  <select th:field="*{idCategoria}">
                      <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}" th:text="${categoria.descripcion}">
                  </select>
                 <br>
                 
-                <label for = "descripcion"> Descripcion:</label>
+                <label for = "descripcion"> [[#{articulo.descripcion}]]:</label>
                 <input type="text" name="descripcion" th:field="*{descripcion}"/>
                 <br>
                 
-                <label for = "detalle"> Detalle:</label>
+                <label for = "detalle"> [[#{articulo.detalle}]]:</label>
                 <textarea name="detalle" th:field="*{detalle}" rows="6" cols="50"/>
                 <br>
                 
-                <label for = "Precio"> Precio:</label>
+                <label for = "Precio"> [[#{articulo.precio}]]:</label>
                 <input type="number" name="detalle" th:field="*{precio}"/>
                 <br>
                 
-                <label for = "existencias"> Existencias:</label>
+                <label for = "existencias"> [[#{articulo.existencias}]]:</label>
                 <input type="number" name="existencias" th:field="*{existencias}"/>
                 <br>
                 
-                <label for = "activo"> Activo:</label>
+                <label for = "activo"> [[#{articulo.activo}]]:</label>
                 <input type="checkbox" name="activo" th:field="*{activo}"/>
                 <hr>
-                <input type="submit" name="guardar" value="Guardar"/>
+                <button type="submit" name="guardar" th:text="#{accion.guardar}"/>
             </form> 
         </div>
 

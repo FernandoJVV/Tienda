@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+    <head th:replace="layout/plantilla :: head">
         <title>Techshop</title>
-        <meta charset="UTF-8">
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>
-        <h2>Nuestros Articulos</h2>
+        <h2>[[#{index.titulo}]]</h2>
 
         <div class="contenido">
             <div th:if="${articulos != null and !articulos.empty}">
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Descripcion</th>
-                            <th>Precio</th>        
+                            <th>[[#{articulo.descripcion}]]</th>
+                            <th>[[#{articulo.precio}]]</th> 
+                            <th>[[#{articulo.comprar}]]</th>      
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="articulo : ${articulos}">
                             <td th:text="${articulo.descripcion}"></td>
-                            <td th:text="${#numbers.formatDecimal(articulo.precio,3,2)}" style="text-align: right"></td>     
+                            <td th:text="${#numbers.formatDecimal(articulo.precio,3,2)}" style="text-align: right"></td> 
+                            <td><a th:href="@{/carrito/agregar/} + ${articulo.idArticulo}">[[#{accion.agregar}]]</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div th:if="${articulos == null or articulos.empty}">
-                No tenemos lista de articulos que mostrar...
+                [[#{articulo.no_mostrar}]]
             </div>
         </div>
 
